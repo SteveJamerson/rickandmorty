@@ -1,0 +1,25 @@
+.home {
+   &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+
+      img.front {
+         position: relative;
+         left: -1.5rem;
+      }
+   }
+
+   &__title {
+      text-align: center;
+      font: {
+         size: 1.75rem;
+         weight: 700;
+      }
+      color: var(--token-color-primary-base);
+      max-width: 35ch;
+   }
+}
