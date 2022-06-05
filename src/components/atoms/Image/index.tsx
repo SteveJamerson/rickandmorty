@@ -22,7 +22,7 @@ export const Image: React.FC<ImageProps> = ({
 
    const source = () => {
       try {
-         return external
+         return external && src
             ? src
             : require(`../../../assets/images/${theme}/${src}${ext}`);
       } catch (e) {

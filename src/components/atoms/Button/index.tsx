@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Icon } from "../Icon";
+import { IconName } from "../Icon/Icon.types";
 import { ButtonProps } from "./Button.interfaces";
 import "./Button.styles.scss";
 
@@ -11,6 +13,9 @@ export const Button: React.FC<ButtonProps> = ({
    link,
    type = "button",
    loading = false,
+   iconName,
+   iconPosition = iconName ? "end" : "",
+   iconSize,
    disabled,
    children,
    ...props
@@ -28,6 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
       {
          button: true,
          [`button--${variant}`]: variant,
+         [`button--icon--${iconPosition}`]: iconPosition,
          [`button--loading`]: loading,
       },
       className,
@@ -48,6 +54,8 @@ export const Button: React.FC<ButtonProps> = ({
          {...props}
       >
          {text || children}
+
+         {iconName && <Icon name={iconName as IconName} size={iconSize} />}
       </button>
    );
 };
