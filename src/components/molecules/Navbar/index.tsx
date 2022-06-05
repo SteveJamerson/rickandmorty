@@ -35,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
    return (
       <nav className={classes} {...props}>
-         <div className="navbar__content container-lg">
+         <div className="navbar__content  container-lg container-xl">
             <div className="navbar__brand">
                <Link to={navBrand?.href || "/"}>
                   <Image src={navBrand?.src} ext=".png"></Image>

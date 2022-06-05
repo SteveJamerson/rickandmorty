@@ -2,12 +2,11 @@
 
 .button {
    position: relative;
-   bottom: 0;
 
    display: flex;
    align-items: center;
    justify-content: center;
-   gap: 1rem;
+   gap: 0.5rem 1rem;
 
    font: {
       weight: 600;
@@ -86,6 +85,25 @@
                color: var(--token-color-grayscale-825);
             }
          }
+      }
+   }
+
+   &--terciary {
+      font-size: 1.25rem;
+   }
+
+   &--icon {
+      &--start {
+         flex-direction: row-reverse;
+      }
+      &--end {
+         flex-direction: row;
+      }
+      &--down {
+         flex-direction: column;
+      }
+      &--up {
+         flex-direction: column-reverse;
       }
    }
 }

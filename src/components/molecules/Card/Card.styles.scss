@@ -1,0 +1,42 @@
+.card {
+   display: flex;
+   justify-content: space-between;
+
+   background-color: var(--token-color-grayscale-200);
+   box-shadow: 0px 4px 4px #00000024;
+
+   &__image {
+      img {
+         height: 100%;
+         width: 175px;
+         aspect-ratio: 1;
+         object-fit: cover;
+         object-position: center;
+
+         &:not(.image--not-found) {
+            object-fit: contain;
+         }
+      }
+   }
+
+   &__text {
+      padding: 2rem;
+   }
+
+   &__title {
+      font: {
+         weight: 600;
+         size: 1.5rem;
+      }
+   }
+   &__subtitle {
+      font: {
+         weight: 600;
+         size: 1.125rem;
+      }
+   }
+
+   &--location {
+      flex-direction: row-reverse;
+   }
+}
