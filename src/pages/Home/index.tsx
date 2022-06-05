@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Image } from "../../components/atoms";
-import { Navbar } from "../../components/molecules/Navbar";
+import { Navbar } from "../../components/molecules";
 import "./styles.scss";
 
 const Home: React.FC = () => {
