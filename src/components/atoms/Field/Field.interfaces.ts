@@ -5,9 +5,11 @@ export interface FieldProps
    variant?: 'outline' | 'fill';
    type: 'text' | 'number' | 'tel' | 'email' | 'password' | 'search';
    id: string;
+   name: string;
    label?: string;
    value?: string | number;
    disabled?: boolean;
    icon?: IconName;
    key?: React.Key;
+   fieldRef?: any;
 }

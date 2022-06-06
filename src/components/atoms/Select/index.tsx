@@ -6,21 +6,25 @@ import "./Select.styles.scss";
 
 export const Select: React.FC<SelectProps> = ({
    data,
-   value,
+   defaultValue,
    label,
+   id,
+   name,
    className,
    loading = false,
    change,
+   fieldRef,
    disabled,
    children,
    ...props
 }) => {
    const dropRef = useRef<HTMLDivElement>(null);
+   const selectRef = useRef<HTMLInputElement>(fieldRef);
 
    const [opened, setOpened] = useState(false);
    const [items, setItem] = useState<
       {
-         id: string;
+         value: string;
          label: string;
       }[]
    >(data);
@@ -37,17 +41,14 @@ export const Select: React.FC<SelectProps> = ({
 
    const toggleSelect = () => setOpened(!opened);
 
-   const handleItemClick = (id: string) => {
+   const handleItemClick = (e: any) => {
+      const id = e.target.id;
       selectedItem === id ? setSelectedItem("") : setSelectedItem(id);
-      triggerValue(id);
-   };
-
-   const triggerValue = (id: string) => {
-      return change && change(id);
+      props.onChange && props.onChange(e);
    };
 
    useEffect(() => {
-      setSelectedItem(value || "");
+      setSelectedItem(defaultValue || "");
    }, []);
 
    useLayoutEffect(() => {
@@ -57,7 +58,7 @@ export const Select: React.FC<SelectProps> = ({
    }, []);
 
    return (
-      <div className={classes} ref={dropRef} {...props}>
+      <div className={classes} ref={dropRef}>
          <div
             className={`select--header ${opened && "open"}`}
             onClick={toggleSelect}
@@ -68,26 +69,47 @@ export const Select: React.FC<SelectProps> = ({
             >
                {label}
             </label>
-
             {selectedItem
-               ? items?.find((item) => item.id === selectedItem)?.label
+               ? items?.find((item) => item.value === selectedItem)?.label
                : ""}
+            <input
+               hidden
+               id={id}
+               name={name}
+               ref={selectRef}
+               type="text"
+               readOnly
+               defaultValue={
+                  selectedItem
+                     ? items?.find((item) => item.value === selectedItem)?.value
+                     : ""
+               }
+            />
+
             <Icon name="arrow-down" size={8}></Icon>
          </div>
          <div className={`select--body ${opened && "open"}`}>
             {items.map((item) => (
-               <div
-                  className={`select--item ${
-                     selectedItem === item.id && "active"
-                  }`}
-                  onClick={() =>
-                     !(selectedItem === item.id) && handleItemClick(item.id)
-                  }
-                  id={item.id}
-                  key={item.id}
-               >
-                  {item.label}
-               </div>
+               <>
+                  <label
+                     htmlFor={item.value}
+                     className={`select--item ${
+                        selectedItem === item.value && "active"
+                     }`}
+                  >
+                     {item.label}
+                  </label>
+                  <input
+                     hidden
+                     onClick={(e) =>
+                        !(selectedItem === item.value) && handleItemClick(e)
+                     }
+                     name={name}
+                     id={item.value}
+                     key={item.value}
+                     defaultValue={item.value}
+                  />
+               </>
             ))}
          </div>
       </div>

@@ -10,13 +10,15 @@ export const Field: React.FC<FieldProps> = ({
    variant = "outline",
    type = "text",
    id,
+   name,
    label,
+   fieldRef,
    icon,
    disabled,
    value,
    ...props
 }) => {
-   const inputRef = useRef<HTMLInputElement>(null);
+   const inputRef = useRef<HTMLInputElement>(fieldRef);
    const [isField, setIsField] = useState(false);
    const [isFocused, setIsFocused] = useState(false);
 
@@ -27,7 +29,14 @@ export const Field: React.FC<FieldProps> = ({
       className,
    ]);
 
-   const handleInputFocus = useCallback(() => {
+   const handleInputChange = useCallback((e: any) => {
+      props.onChange &&
+         props.onChange(e as React.FocusEvent<HTMLInputElement, Element>);
+   }, []);
+
+   const handleInputFocus = useCallback((e: any) => {
+      props.onFocus &&
+         props.onFocus(e as React.FocusEvent<HTMLInputElement, Element>);
       setIsFocused(true);
    }, []);
 
@@ -41,10 +50,12 @@ export const Field: React.FC<FieldProps> = ({
          <div className={classes}>
             {icon && <Icon name={icon}></Icon>}
             <input
+               onChange={handleInputChange}
                onFocus={handleInputFocus}
                onBlur={handleInputBlur}
                type={type}
                id={id}
+               name={name}
                disabled={disabled}
                ref={inputRef}
                defaultValue={value}

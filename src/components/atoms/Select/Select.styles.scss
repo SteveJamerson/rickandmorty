@@ -8,6 +8,15 @@
    margin: 0.5rem 0;
    padding-bottom: 1rem;
 
+   input {
+      all: unset;
+      width: -webkit-fill-available;
+
+      &[hidden] {
+         display: none;
+      }
+   }
+
    &--header {
       position: relative;
       padding: 1rem;
@@ -65,6 +74,8 @@
       background-color: var(--token-color-grayscale-100);
 
       .select--item {
+         display: block;
+         width: 100%;
          padding: 0.5rem 1rem;
          cursor: pointer;
 
