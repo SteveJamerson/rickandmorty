@@ -1,3 +1,5 @@
+@import "../../../styles/mixins/breakpoints";
+
 .card {
    display: flex;
    justify-content: space-between;
@@ -8,19 +10,23 @@
    &__image {
       img {
          height: 100%;
-         width: 175px;
+         width: 100px;
          aspect-ratio: 1;
          object-fit: cover;
          object-position: center;
 
-         &:not(.image--not-found) {
-            object-fit: contain;
+         @include break("xs") {
+            width: 175px;
          }
       }
    }
 
    &__text {
-      padding: 2rem;
+      padding: 1rem;
+
+      @include break("xs") {
+         padding: 2rem;
+      }
    }
 
    &__title {

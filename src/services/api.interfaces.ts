@@ -44,7 +44,6 @@ export interface RequestCharacter {
       type?: string;
       gender?: 'female' | 'male' | 'genderless';
    };
-   index?: string | string[];
 }
 
 export interface ResponseLocation extends Response {
@@ -65,5 +64,23 @@ export interface RequestLocation {
       type?: string;
       dimension?: string;
    };
-   index?: string | string[];
+}
+
+export interface ResponseEpisode extends Response {
+   results: ResultsEpisode[];
+}
+
+export interface ResultsEpisode extends Results {
+   air_date: string;
+   episode: string;
+   characters: string[];
+   image?: string;
+}
+
+export interface RequestEpisode {
+   query?: {
+      page?: string;
+      name?: string;
+      episode?: string;
+   };
 }
