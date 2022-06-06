@@ -12,7 +12,7 @@ const Home: React.FC = () => {
                Está preparado para navegar no mundo de Rick and Morty ?
             </h2>
             <Image src="rick-and-morty" ext=".png" className="front" />
-            <Button link="personsagens">Iniciar Aventura</Button>
+            <Button link="character">Iniciar Aventura</Button>
             <p className="fw-600">©rickandmortyapi.com</p>
          </section>
       </>
