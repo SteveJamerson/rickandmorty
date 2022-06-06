@@ -37,7 +37,12 @@ const Locations: React.FC = () => {
    const handleShown = () => {
       setShown((n) => {
          const newValue = n + 4;
-         if (newValue > locations.length) handlePage();
+         if (
+            newValue > locations.length &&
+            !(newValue >= (limits?.count as number))
+         ) {
+            handlePage();
+         }
          return newValue;
       });
    };
@@ -51,8 +56,6 @@ const Locations: React.FC = () => {
    };
 
    const handleImage = (url: string) => {
-      console.log(url);
-
       return url
          ? url.replace("character/", "character/avatar/") + ".jpeg"
          : "";
@@ -95,7 +98,7 @@ const Locations: React.FC = () => {
                iconPosition="down"
                className="more"
                onClick={handleShown}
-               disabled={page === limits?.pages}
+               disabled={shown >= (limits?.count || 0)}
             >
                Mostrar Mais
             </Button>
