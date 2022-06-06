@@ -1,0 +1,81 @@
+.field {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   margin: 0.5rem 0;
+   padding-bottom: 1rem;
+   color: var(--token-color-primary-base);
+
+   label {
+      position: absolute;
+      left: 1.25rem;
+      top: 1rem;
+      color: var(--token-color-primary-base);
+
+      font-size: 1rem;
+
+      transition: 0.3s;
+
+      &.caption {
+         left: 1rem;
+         top: -0.625rem;
+         padding: 0 0.25rem;
+         background-color: var(--token-background-body);
+         font-size: 0.875rem;
+      }
+   }
+
+   .icon {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+   }
+
+   input {
+      font-family: "Open Sans";
+      height: 55px;
+      width: 100%;
+      padding: 0.5rem 1rem;
+
+      font-size: 1rem;
+
+      border-radius: var(--token-border-radius-smaller);
+
+      color: var(--token-color-primary-base);
+
+      border: {
+         width: var(--token-border-width-default);
+         style: var(--token-border-style-solid);
+         color: var(--token-color-primary-base);
+      }
+      background-color: transparent;
+
+      &:focus {
+         outline: none;
+      }
+
+      &:disabled {
+         cursor: no-drop;
+      }
+   }
+}
+
+input {
+   &::-webkit-inner-spin-button,
+   &::-webkit-search-decoration,
+   &::-webkit-search-cancel-button,
+   &::-webkit-search-results-button,
+   &::-webkit-search-results-decoration {
+      display: none;
+      -webkit-appearance: none;
+   }
+   &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: auto;
+      height: auto;
+      color: transparent;
+      background: transparent;
+   }
+}
