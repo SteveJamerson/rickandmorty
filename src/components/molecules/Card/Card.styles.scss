@@ -42,7 +42,58 @@
       }
    }
 
+   &__status {
+      position: relative;
+      text-transform: capitalize;
+      padding-left: 1.25rem;
+
+      &::before {
+         content: "";
+         position: absolute;
+         left: 0;
+         top: 0;
+         bottom: 0;
+         margin: auto;
+         display: block;
+         width: 0.75rem;
+         height: 0.75rem;
+         aspect-ratio: 1;
+         background-color: var(--token-color-success-base);
+         border-radius: var(--token-border-radius-pill);
+      }
+
+      &.dead::before {
+         background-color: var(--token-color-grayscale-850);
+      }
+   }
+
    &--location {
       flex-direction: row-reverse;
+   }
+
+   &--charecter {
+      justify-content: flex-start;
+      font-size: 0.875rem;
+      color: var(--token-color-white);
+      background-color: var(--token-color-grayscale-800);
+      border-radius: var(--token-border-radius-smaller);
+
+      .card__text {
+         padding: 1rem;
+      }
+
+      .card__image img {
+         height: 130px;
+
+         border-radius: var(--token-border-radius-smaller) 0 0
+            var(--token-border-radius-smaller);
+      }
+
+      .card__title {
+         font: {
+            weight: 700;
+            size: 1rem;
+         }
+      }
    }
 }

@@ -10,4 +10,5 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
    };
    title?: string;
    subtitle?: string;
+   status?: 'Alive' | 'Dead';
 }
