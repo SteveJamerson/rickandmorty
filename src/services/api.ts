@@ -1,8 +1,10 @@
 import { environments } from '../environments';
 import {
    RequestCharacter,
+   RequestEpisode,
    RequestLocation,
    ResponseCharacter,
+   ResponseEpisode,
    ResponseLocation,
 } from './api.interfaces';
 
@@ -24,5 +26,14 @@ export const getLocation = async (
    const { query } = params;
    return fetch(
       `${ENDPOINT}/location?${new URLSearchParams(Object.assign({}, query))}`
+   ).then((response) => response.json());
+};
+
+export const getEpisode = async (
+   params: RequestEpisode
+): Promise<ResponseEpisode> => {
+   const { query } = params;
+   return fetch(
+      `${ENDPOINT}/episode?${new URLSearchParams(Object.assign({}, query))}`
    ).then((response) => response.json());
 };
