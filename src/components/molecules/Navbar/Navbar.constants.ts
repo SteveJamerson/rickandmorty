@@ -7,5 +7,5 @@ export const DEFAULT_BRAND = {
 export const DEFAULT_LINKS: NavbarLink[] = [
    { text: 'Personagens', href: '/personagens' },
    { text: 'Lugares Famosos', href: '/locations' },
-   { text: 'Episódios', href: '/episodios' },
+   { text: 'Episódios', href: '/episodes' },
 ];
