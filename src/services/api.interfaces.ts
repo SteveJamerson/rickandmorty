@@ -15,7 +15,7 @@ export interface Results {
 }
 
 export interface ResponseCharacter extends Response {
-   results: ResultsCharacter;
+   results: ResultsCharacter[];
 }
 
 export interface ResultsCharacter extends Results {

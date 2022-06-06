@@ -13,10 +13,9 @@ const { ENDPOINT } = environments;
 export const getCharacter = async (
    params: RequestCharacter
 ): Promise<ResponseCharacter> => {
+   const { query } = params;
    return fetch(
-      `${ENDPOINT}/character?${new URLSearchParams(
-         Object.assign({}, ...(params?.query as any))
-      )}`
+      `${ENDPOINT}/character?${new URLSearchParams(Object.assign({}, query))}`
    ).then((response) => response.json());
 };
 
