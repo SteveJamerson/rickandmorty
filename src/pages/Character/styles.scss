@@ -23,10 +23,15 @@
       max-width: 35ch;
    }
 
+   &__row {
+      margin: auto;
+   }
+
    &__result {
       padding: 3rem 0;
       color: var(--token-color-white);
       background-color: var(--token-color-grayscale-900);
+      transition: 0.3s;
 
       .cards {
          display: grid;

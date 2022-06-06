@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Image } from "../../components/atoms";
-import { Navbar } from "../../components/molecules";
+import { Footer, Navbar } from "../../components/molecules";
 import "./styles.scss";
 
 const Home: React.FC = () => {
@@ -13,7 +13,7 @@ const Home: React.FC = () => {
             </h2>
             <Image src="rick-and-morty" ext=".png" className="front" />
             <Button link="character">Iniciar Aventura</Button>
-            <p className="fw-600">©rickandmortyapi.com</p>
+            <Footer />
          </section>
       </>
    );
