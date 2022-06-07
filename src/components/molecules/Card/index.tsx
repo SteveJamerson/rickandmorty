@@ -10,6 +10,7 @@ export const Card: React.FC<CardProps> = ({
    title,
    subtitle,
    status,
+   episode,
    className,
    children,
    ...props
@@ -32,9 +33,14 @@ export const Card: React.FC<CardProps> = ({
             ></Image>
          </div>
          <div className="card__text">
-            <p className="card__title">{title}</p>
-            <p className="card__subtitle">{subtitle}</p>
-            <p className={`card__status ${status?.toLowerCase()}`}>{status}</p>
+            {episode && <p className="card__episode">{episode.slice(-2)}</p>}
+            {title && <p className="card__title">{title}</p>}
+            {subtitle && <p className="card__subtitle">{subtitle}</p>}
+            {status && (
+               <p className={`card__status ${status?.toLowerCase()}`}>
+                  {status}
+               </p>
+            )}
             {children}
          </div>
       </div>
