@@ -89,8 +89,8 @@ export const Select: React.FC<SelectProps> = ({
             <Icon name="arrow-down" size={8}></Icon>
          </div>
          <div className={`select--body ${opened && "open"}`}>
-            {items.map((item) => (
-               <>
+            {items.map((item, i) => (
+               <span key={i}>
                   <label
                      htmlFor={item.value}
                      className={`select--item ${
@@ -109,7 +109,7 @@ export const Select: React.FC<SelectProps> = ({
                      key={item.value}
                      defaultValue={item.value}
                   />
-               </>
+               </span>
             ))}
          </div>
       </div>
