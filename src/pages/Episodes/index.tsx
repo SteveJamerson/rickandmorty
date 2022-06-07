@@ -110,7 +110,10 @@ const Episodes: React.FC = () => {
                            external: true,
                         }}
                         title={location.name}
-                        subtitle={`Lançamento ${location.air_date}`}
+                        subtitle={`Lançamento ${new Date(
+                           location.air_date
+                        ).toLocaleDateString()}`}
+                        episode={location.episode}
                      ></Card>
                   );
                })}
