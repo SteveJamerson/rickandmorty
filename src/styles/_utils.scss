@@ -1,0 +1,40 @@
+.dots {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-wrap: wrap;
+
+   .dot {
+      height: 0;
+      cursor: pointer;
+      opacity: 0.6;
+
+      &::after {
+         content: "";
+         display: block;
+         background-color: var(--token-color-grayscale-850);
+         width: 0.75rem;
+         height: 0.75rem;
+         border-radius: 0.75rem;
+         transition: 0.5s;
+         transition-delay: 0.1s;
+         filter: brightness(0.5);
+      }
+
+      &:hover {
+         opacity: 0.8;
+      }
+
+      &:checked,
+      &.checked {
+         opacity: 1;
+
+         &::after {
+            position: relative;
+            width: 1.5rem;
+            left: -0.375rem;
+            transition: 0.5s;
+         }
+      }
+   }
+}
