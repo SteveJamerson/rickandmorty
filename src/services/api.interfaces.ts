@@ -15,7 +15,7 @@ export interface Results {
 }
 
 export interface ResponseCharacter extends Response {
-   results: ResultsCharacter;
+   results: ResultsCharacter[];
 }
 
 export interface ResultsCharacter extends Results {
@@ -32,6 +32,8 @@ export interface ResultsCharacter extends Results {
       url: string;
    };
    image: string;
+   first?: string;
+   last?: string;
    episode: string[];
 }
 

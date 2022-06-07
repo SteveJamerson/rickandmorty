@@ -9,6 +9,7 @@ export const Card: React.FC<CardProps> = ({
    image,
    title,
    subtitle,
+   status,
    className,
    children,
    ...props
@@ -22,7 +23,7 @@ export const Card: React.FC<CardProps> = ({
    ]);
 
    return (
-      <div className={classes}>
+      <div className={classes} {...props}>
          <div className="card__image">
             <Image
                src={image.src}
@@ -33,6 +34,7 @@ export const Card: React.FC<CardProps> = ({
          <div className="card__text">
             <p className="card__title">{title}</p>
             <p className="card__subtitle">{subtitle}</p>
+            <p className={`card__status ${status?.toLowerCase()}`}>{status}</p>
             {children}
          </div>
       </div>

@@ -1,0 +1,109 @@
+@import "../../../styles/mixins/breakpoints";
+
+.select {
+   position: relative;
+   width: 100%;
+   color: var(--token-color-primary-base);
+   background-color: transparent;
+   margin: 0.5rem 0;
+   padding-bottom: 1rem;
+
+   input {
+      all: unset;
+      width: -webkit-fill-available;
+
+      &[hidden] {
+         display: none;
+      }
+   }
+
+   &--header {
+      position: relative;
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      height: 55px;
+      border: 1px solid var(--token-color-primary-base) {
+         radius: var(--token-border-radius-smaller);
+      }
+
+      label {
+         position: absolute;
+         left: 1.25rem;
+         top: 1rem;
+
+         font: {
+            weight: 400;
+            size: 1rem;
+         }
+
+         transition: 0.3s;
+
+         &.caption {
+            left: 1rem;
+            top: -0.625rem;
+            padding: 0 0.25rem;
+            background-color: var(--token-background-body);
+            font-size: 0.875rem;
+         }
+      }
+
+      .icon {
+         position: absolute;
+         right: 1rem;
+         top: 1.5rem;
+         transition: 0.3s;
+      }
+   }
+
+   &--body {
+      display: none;
+      position: absolute;
+      right: 0px;
+      left: 0px;
+      z-index: 1100;
+
+      padding: 1rem 0;
+      border: 1px solid var(--token-color-primary-base) {
+         radius: 0 0 var(--token-border-radius-smaller)
+            var(--token-border-radius-smaller);
+      }
+      background-color: var(--token-color-grayscale-100);
+
+      .select--item {
+         display: block;
+         width: 100%;
+         padding: 0.5rem 1rem;
+         cursor: pointer;
+
+         &.active {
+            background-color: var(--token-color-grayscale-190);
+         }
+
+         &:hover {
+            background-color: var(--token-color-grayscale-190);
+         }
+      }
+   }
+
+   &.open {
+      .icon {
+         transform: rotate(-180deg);
+      }
+
+      .select--body {
+         display: block;
+      }
+
+      .select--header {
+         border: {
+            bottom: 0;
+            radius: var(--token-border-radius-smaller)
+               var(--token-border-radius-smaller) 0 0;
+         }
+      }
+   }
+}

@@ -1,11 +1,18 @@
 @import "../../../styles/mixins/breakpoints";
 
-.card {
+.card--details {
+   position: relative;
    display: flex;
-   justify-content: space-between;
+   justify-content: flex-start;
+   min-width: 80vw;
 
-   background-color: var(--token-color-grayscale-200);
+   color: var(--token-color-white);
+   background-color: var(--token-color-grayscale-900);
    box-shadow: 0px 4px 4px #00000024;
+
+   border-radius: var(--token-border-radius-large);
+
+   padding: 2rem;
 
    &__image {
       img {
@@ -14,11 +21,16 @@
          aspect-ratio: 1;
          object-fit: cover;
          object-position: center;
+         border-radius: var(--token-border-radius-medium);
 
          @include break("xs") {
             width: 175px;
          }
       }
+   }
+
+   &__label {
+      color: var(--token-color-grayscale-600);
    }
 
    &__text {
@@ -67,34 +79,16 @@
       }
    }
 
-   &--location {
-      flex-direction: row-reverse;
+   &__extra {
+      align-self: flex-end;
+      justify-self: flex-end;
    }
 
-   &--charecter {
-      justify-content: flex-start;
-      font-size: 0.875rem;
-      color: var(--token-color-white);
-      background-color: var(--token-color-grayscale-800);
-      border-radius: var(--token-border-radius-smaller);
+   .icon {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+
       cursor: pointer;
-
-      .card__text {
-         padding: 1rem;
-      }
-
-      .card__image img {
-         height: 130px;
-
-         border-radius: var(--token-border-radius-smaller) 0 0
-            var(--token-border-radius-smaller);
-      }
-
-      .card__title {
-         font: {
-            weight: 700;
-            size: 1rem;
-         }
-      }
    }
 }
