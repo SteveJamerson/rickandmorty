@@ -23,7 +23,7 @@ export const Card: React.FC<CardProps> = ({
    ]);
 
    return (
-      <div className={classes}>
+      <div className={classes} {...props}>
          <div className="card__image">
             <Image
                src={image.src}
