@@ -2,6 +2,7 @@
    "name": "rickandmorty",
    "version": "0.1.0",
    "private": true,
+   "homepage": "https://stevejamerson.github.io/rickandmorty/",
    "dependencies": {
       "@testing-library/jest-dom": "^5.14.1",
       "@testing-library/react": "^13.0.0",
@@ -13,6 +14,7 @@
       "@types/react-helmet": "^6.1.5",
       "@types/react-router-dom": "^5.3.3",
       "clsx": "^1.1.1",
+      "gh-pages": "^4.0.0",
       "react": "^18.1.0",
       "react-dom": "^18.1.0",
       "react-helmet": "^6.1.0",
@@ -28,7 +30,9 @@
       "build": "react-scripts build",
       "build:style": "style-dictionary build --config ./src/styles/build.js",
       "test": "react-scripts test",
-      "eject": "react-scripts eject"
+      "eject": "react-scripts eject",
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -b pages -d build"
    },
    "eslintConfig": {
       "extends": [
