@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Field } from "../../components/atoms/Field";
-import { Select } from "../../components/atoms/Select";
-import { Card, Footer, Navbar } from "../../components/molecules";
+import { Field, Select } from "../../components/atoms";
+import {
+   Card,
+   CardDetails,
+   Footer,
+   Modal,
+   Navbar,
+} from "../../components/molecules";
 import { getCharacter } from "../../services/api";
 import {
    RequestCharacter,
@@ -23,64 +28,91 @@ const Character: React.FC = () => {
    });
 
    const [characters, setCharacters] = useState<ResultsCharacter[]>([]);
-   const [shown, setShown] = useState<number>(6);
+   const [shown, setShown] = useState<number>(0);
    const [page, setPages] = useState(1);
    const [limits, setLimits] = useState<{ pages: number; count: number }>();
+   const [charactersDetails, setCharactersDetails] =
+      useState<ResultsCharacter>();
+   const [charactersShow, setCharactersShow] = useState(false);
 
-   const handleCharacter = useCallback(async (params: RequestCharacter) => {
-      await getCharacter(params)
-         .then(({ info, results }) => {
-            const { pages, count } = info;
-            setLimits({ pages, count });
-            return results;
-         })
-         .then((results) => {
-            setCharacters((l) => {
-               const newValue = !l?.length ? results : [...l, ...results];
+   const handleCharacter = useCallback(
+      async (params: RequestCharacter) => {
+         await getCharacter(params)
+            .then(({ info, results }) => {
+               const { pages, count } = info;
+               setLimits({ pages, count });
+               return results;
+            })
+            .then((results) => {
+               const newValue = !characters?.length
+                  ? results
+                  : [...characters, ...results];
                const filterValue = Array.from(
                   new Set(newValue.map((a) => a.id))
-               ).map((id) => {
-                  return newValue.find((a) => a.id === id);
-               }) as ResultsCharacter[];
+               ).map((id) =>
+                  newValue.find((a) => a.id === id)
+               ) as ResultsCharacter[];
                return filterValue;
+            })
+            .then((results) => {
+               setCharacters(results);
             });
-         });
+      },
+      [characters]
+   );
+   const handleDetails = useCallback((chr: ResultsCharacter) => {
+      console.log(chr);
+
+      setCharactersDetails(chr);
+      setCharactersShow((s) => !s);
    }, []);
 
-   const handleShown = () => {
-      setShown((n) => {
-         const newValue = n + 4;
+   const handleShown = (n: number) => {
+      setShown((_) => {
+         const newValue = n;
+         console.log(newValue);
+
          if (
-            newValue > characters.length &&
+            newValue + 6 >= characters.length &&
             !(newValue >= (limits?.count as number))
          ) {
-            handlePage();
+            handlePage(newValue);
          }
          return newValue;
       });
    };
 
-   const handlePage = () => {
-      setPages((page) => {
-         const newValue = page + 1;
-         handleCharacter({ query: { page: String(newValue) } });
+   const handlePage = (page: number) => {
+      setPages((_) => {
+         const newValue = page ? (((page + 6) / 20) | 0) + 1 : 1;
+         handleCharacter({
+            query: { ...formData, page: String(newValue) },
+         } as RequestCharacter);
          return newValue;
       });
    };
 
-   const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
-      event.preventDefault();
-
-      setFormData((data) => {
+   const handleSearch = useCallback(
+      (event: React.FormEvent<HTMLInputElement>) => {
+         event.preventDefault();
          const { name, value } = event.currentTarget;
-         data[name as "name" | "status" | "gender"] = value;
-         setCharacters([]);
-         setPages(1);
-         setShown(6);
-         handleCharacter({ query: data } as RequestCharacter);
-         return data;
-      });
-   };
+
+         setFormData((data) => {
+            data[name as "name" | "status" | "gender"] = value;
+            return data;
+         });
+
+         handleSubmit();
+      },
+      []
+   );
+
+   const handleSubmit = useCallback(() => {
+      setCharacters([]);
+      setPages(1);
+      setShown(0);
+      handleCharacter({ query: formData } as RequestCharacter);
+   }, []);
 
    useEffect(() => {}, []);
 
@@ -138,7 +170,7 @@ const Character: React.FC = () => {
                <div className="container">
                   <p>Resultados</p>
                   <div className="cards">
-                     {characters.slice(0, shown).map((character, i) => {
+                     {characters.slice(shown, shown + 6).map((character, i) => {
                         return (
                            <Card
                               key={i}
@@ -149,12 +181,55 @@ const Character: React.FC = () => {
                               }}
                               title={character.name}
                               status={character.status as "Alive" | "Dead"}
-                           ></Card>
+                              onClick={() => handleDetails(character)}
+                           >
+                              {character?.first}
+                           </Card>
+                        );
+                     })}
+                  </div>
+                  <div className="dots">
+                     {Array.from(
+                        { length: characters.length / 6 + 1 },
+                        (_, i) => i
+                     ).map((index, i) => {
+                        return (
+                           <input
+                              className="dot"
+                              key={i}
+                              type="radio"
+                              name="dots"
+                              checked={shown === index * 6}
+                              onClick={() => handleShown(index * 6)}
+                           />
                         );
                      })}
                   </div>
                </div>
             </section>
+         ) : (
+            ""
+         )}
+         {charactersShow ? (
+            <Modal>
+               <CardDetails
+                  title={charactersDetails?.name}
+                  status={charactersDetails?.status as "Alive" | "Dead"}
+                  gender={
+                     charactersDetails?.gender as
+                        | "female"
+                        | "male"
+                        | "genderless"
+                  }
+                  image={{
+                     src: charactersDetails?.image as string,
+                     external: true,
+                  }}
+                  close={() => {
+                     setCharactersShow(false);
+                  }}
+               ></CardDetails>
+            </Modal>
          ) : (
             ""
          )}
