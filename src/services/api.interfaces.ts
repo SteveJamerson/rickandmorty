@@ -32,6 +32,8 @@ export interface ResultsCharacter extends Results {
       url: string;
    };
    image: string;
+   first?: string;
+   last?: string;
    episode: string[];
 }
 
