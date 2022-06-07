@@ -1,5 +1,0 @@
-@each $value in $weights {
-   .fw-#{$value} {
-      font-weight: $value;
-   }
-}
